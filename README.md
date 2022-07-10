@@ -3,9 +3,15 @@
 This project provides an algorithm for fast
 extraction of high-conductance trees (called *core traces*) 
 rooted on designated graph nodes. 
+<br>
+<br>
+
+**License:** Apache Software License
+<br>**Author:** Emmanouil (Manios) Krasanakis
+<br>**Dependencies:** `networkx` (required) `pcst_fast` (optional)
 
 # :tent: Roadmap
-:x: Method ensemble.
+:x: Method ensemble.<br>
 :x: Application for github project understanding.
 
 
@@ -22,13 +28,12 @@ print(dp.conductance(graph, trace))
 ```
 
 # :dart: Features
-* Run in near-linear times with respect 
-to graph edges, i.e. if you double the number of edges,
-expect an approximate doubling of running time.
+* Near-linear running time with respect 
+to the number of edges (doubling the edges, 
+approximately doubles running time).
 * Provable *1+A* factor approximations of maximum conductance, 
-where *A* tend to be small (please refer to citation for more details).
-* Extensibility to integrate future breakthroughs of the related rooted
-Steiner tree extraction algorithms.
+where *A* tend to be small.
+* Extensibility to future breakthroughs on Steiner problems.
 
 
 

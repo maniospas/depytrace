@@ -6,7 +6,7 @@ import setuptools
 # - deploy : twine upload dist/*
 
 with open("README.md", "r") as file:
-    long_description = file.read()
+    long_description = file.read().replace(":zap:", "").replace(":dart:", "").replace(":wrench:", "")
 
 setuptools.setup(
     name='depytrace',
