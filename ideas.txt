@@ -1,0 +1,23 @@
+
+implementation = {  #"none": lambda G, r:[],
+                    #"self-quarantine": lambda G, r: [r],
+                    #"quarantine": lambda G, r: G,
+                    #"sample_sparsify": conductance.spectral.sparsifier,
+                    "directed_sparsify": lambda G,r: conductance.spectral.directed_sparsifier(G, r, lambda g, s: measures.ELOD(g, s, alpha)),
+                    #"greedy_sparsify": lambda G,r: conductance.spectral.greedy_sparsifier(G,r,lambda g, s: measures.ELOD(g, s, alpha)),
+                    #"greedy_directed_sparsify": lambda G,r: conductance.spectral.greedy(G,conductance.spectral.directed_sparsifier(G,r)),
+                    #"greedy_directed_sparsify": lambda G,r: conductance.spectral.spectral_greedy(G,r,lambda g, s: measures.ELOD(g, s, alpha), lambda a,b: a-alpha*b),
+                    #"random_greedy_directed_sparsify": lambda G,r: list(sample(list(G), len(conductance.spectral.greedy(G,conductance.spectral.directed_sparsifier(G,r))))),
+                    #"eigen_sparsify": conductance.spectral.eigenreductor,
+                    #"directed_sparsify": conductance.spectral.directed_sparsifier,
+                    #"pcst_core": lambda G,r: conductance.trace.core(G, r, conductance.trace.RPCST),
+                    # "clever_pcst": lambda G,r: conductance.trace.cleverRPCST(G, r, alpha),
+                    #"pcst": lambda G,r: conductance.trace.RPCST(G, r, alpha),
+                    #"greedy_core": lambda G,r: conductance.trace.core(G, r, lambda G,r,c: conductance.spectral.greedy(G, [r], lambda a,b: c*len(G)+a-c*b)),
+                    #"elod_core": lambda G,r: conductance.trace.core(G, r, conductance.trace.maxELOD),
+                    #"max_cut": lambda G,r: conductance.trace.RPCST(G, r, 0, pruning='gw'),
+                    "clever_pcst": lambda G,r: conductance.trace.core(G, r, conductance.trace.cleverRPCST),
+                    "elod_fast": lambda G,r: conductance.trace.core(G, r, conductance.backup.ELODFast(False)),
+                    "greedy": lambda G,r: conductance.spectral.greedy(G, [r], lambda a,b: a-alpha*b),
+                    #"greedy_recursive": lambda G,r: conductance.spectral.greedy_recursive(G, [r], [lambda a,b: a-(1+sigma)/10.*alpha*b for sigma in range(10)])
+                    }
