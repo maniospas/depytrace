@@ -57,7 +57,7 @@ also use a maximizer provided by the library that adjusts and depends on the
 [pcst_fast](https://github.com/fraenkel-lab/pcst_fast) Steiner tree solver.
 To use the related maximizer, just install the *pcst_fast* library 
 (if *gcc* is properly set up, this should be as simple as 
-`pip install pcst_fast`) and call.
+`pip install pcst_fast`) and run the snipper:
 
 ```python
 import depytrace as dp

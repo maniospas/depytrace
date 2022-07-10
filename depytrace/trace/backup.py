@@ -1,5 +1,4 @@
 import networkx as nx
-import pcst_fast
 import numpy as np
 from depytrace.trace.utils.heap import Heap
 from collections import deque as Que
@@ -207,6 +206,7 @@ class MinCut:
 
 class PCSTFast:
     def __call__(self, G, r, a, D=None):
+        import pcst_fast
         node_map = {}
         node_map_inv = {}
         for v in G:

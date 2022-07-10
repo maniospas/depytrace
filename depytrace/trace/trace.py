@@ -137,7 +137,7 @@ def maxELOD (G, r, a):
 
 
 class Core:
-    def __init__(self, trace_method=ELODFast, eps=1.E-6, starting_a=-1):
+    def __init__(self, trace_method=ELODFast(), eps=1.E-6, starting_a=-1):
         self.trace_method = trace_method
         self.eps = eps
         self.starting_a = starting_a
