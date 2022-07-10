@@ -1,5 +1,4 @@
-import trace
-import eval
+import depytrace
 from random import random, seed
 import glob
 from timeit import default_timer as time
@@ -11,24 +10,24 @@ def er_graphs():
         seed(i)
         nodes = int(100+random()*400)
         graph_type = ('ER', nodes, 0.01+random()*10/nodes)
-        yield eval.create_graph(*graph_type, i, one_direction=False, random_weights=int(random()*10))
+        yield depytrace.create_graph(*graph_type, i, one_direction=False, random_weights=int(random() * 10))
 
 
 def dependeny_graphs():
     datasets = {file.replace("_", "")[len("data/dependencies") + 1:-4]: file for file in
                 glob.glob('data/dependencies/*.csv') if "package" not in file}
     for dataset in datasets:
-        yield eval.import_graph(datasets[dataset], directed=False).to_directed()
+        yield depytrace.import_graph(datasets[dataset], directed=False).to_directed()
 
 
 implementation = {
-    #"eigen": trace.eigenreductor,
-    "greedy": trace.Greedy(),
-    "sparse": trace.Sparsifier(eval.ELOD),
-    "maxcut": trace.RPCST,
-    "rpcst": trace.Core(trace.RPCST),
-    "rpcst*": trace.Core(trace.cleverRPCST),
-    #"fast": trace.Core(trace.ELODFast())
+    #"eigen": depytrace.eigenreductor,
+    "greedy": depytrace.Greedy(),
+    "sparse": depytrace.Sparsifier(depytrace.ELOD),
+    "maxcut": depytrace.RPCST,
+    "rpcst": depytrace.Core(depytrace.RPCST),
+    "rpcst*": depytrace.Core(depytrace.cleverRPCST),
+    #"fast": depytrace.Core(depytrace.ELODFast())
 }
 
 nodes = [len(G) for G in dependeny_graphs()]
@@ -65,10 +64,10 @@ for G in dependeny_graphs():
                 tic = time()
                 subgraph = implementation[method](G, r)
                 times[method].append(time()-tic)
-                conductances[method].append(eval.conductance(G, subgraph))
-                heterogenity[method].append(eval.heterogenity(G, subgraph))
+                conductances[method].append(depytrace.conductance(G, subgraph))
+                heterogenity[method].append(depytrace.heterogenity(G, subgraph))
 
-    R, crit = eval.friedman_ranks(conductances)
+    R, crit = depytrace.friedman_ranks(conductances)
     print(f'Critical difference {crit:.1f}')
     for method in implementation:
         print(f"{method} \t {sum(conductances[method])/len(conductances[method]):.0f} ({R[method]:.1f}) in {sum(times[method])/len(times[method])*1000:.0f} ms,"

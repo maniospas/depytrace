@@ -1,6 +1,6 @@
 import networkx as nx
 import numpy as np
-from eval import conductance
+from depytrace.eval import conductance
 from random import random
 from collections import deque as Que
 

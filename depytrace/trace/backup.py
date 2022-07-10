@@ -1,7 +1,7 @@
 import networkx as nx
 import pcst_fast
 import numpy as np
-from trace.utils.heap import Heap
+from depytrace.trace.utils.heap import Heap
 from collections import deque as Que
 
 def _backward(T, a, D0):
